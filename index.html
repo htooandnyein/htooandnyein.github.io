@@ -3,231 +3,379 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel+Decorative:wght@400;700&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+    <title>The Wedding of Mg Mg & Mya Mya</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;700&family=Padauk:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- အဓိက ဒီဇိုင်း --- */
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #cda45e;
+            --secondary: #1a1814;
+            --bg-cream: #fbf9f4;
+            --text-dark: #444;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            margin: 0; padding: 0;
-            background: linear-gradient(135deg, #fffbf2 0%, #f5efe6 100%);
-            font-family: 'Padauk', sans-serif;
-            color: #5a4a42;
-            text-align: center;
-            min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-            padding-bottom: 50px;
+            font-family: 'Padauk', 'Lato', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            overflow-x: hidden;
         }
 
-        /* ကဒ်ဘောင် */
-        .card-container {
-            padding: 20px;
-            width: 100%;
-            max-width: 550px;
-            box-sizing: border-box; /* Padding ကြောင့် ဆိုဒ်မကြီးသွားအောင် */
+        /* --- LOADING SCREEN --- */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-cream); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease;
         }
-        .wedding-card {
-            background: #ffffff;
-            padding: 40px 20px;
-            border-radius: 8px;
-            box-shadow: 0 15px 35px rgba(184, 156, 109, 0.2);
-            border: 3px solid #cda45e;
-            position: relative;
-            overflow: hidden;
+        .heart-beat {
+            font-size: 3rem; color: var(--primary);
+            animation: beat 1s infinite alternate;
+        }
+        @keyframes beat { to { transform: scale(1.2); } }
+
+        /* --- MUSIC BUTTON --- */
+        .music-btn {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--primary); color: white;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 2px solid white;
+        }
+        .music-rotating { animation: spin 3s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* --- HERO SECTION --- */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://placehold.co/1920x1080/222/cda45e?text=Wedding+Background');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: white; text-align: center; position: relative;
         }
         
-        /* ထောင့်က အလှဆင်ပန်းကနုတ် (Fixed for GitHub/Standard Web) */
-        .wedding-card::before, .wedding-card::after {
-            content: '\2767'; /* Unicode Floral Heart */
-            position: absolute; font-size: 3rem; color: #e0c097; opacity: 0.3;
-        }
-        .wedding-card::before { top: 10px; left: 10px; transform: rotate(-45deg); }
-        .wedding-card::after { bottom: 10px; right: 10px; transform: rotate(135deg); }
+        .hero-subtitle { font-family: 'Cinzel', serif; letter-spacing: 3px; font-size: 1.2rem; margin-bottom: 10px; animation: fadeInDown 1.5s; }
+        .hero-title { font-family: 'Great Vibes', cursive; font-size: 5rem; margin: 10px 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); animation: zoomIn 2s; }
+        .hero-date { font-size: 1.5rem; letter-spacing: 2px; border-top: 1px solid white; border-bottom: 1px solid white; padding: 10px 20px; margin-top: 20px; animation: fadeInUp 1.5s; }
 
-        /* --- ဓာတ်ပုံ အပိုင်း --- */
-        .photo-frame {
-            margin: 0 auto 20px auto;
-            width: 160px; height: 160px;
+        /* --- SECTIONS COMMON --- */
+        section { padding: 80px 20px; text-align: center; position: relative; }
+        .section-title { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--primary); margin-bottom: 10px; }
+        .section-subtitle { font-family: 'Cinzel', serif; color: #888; font-size: 1rem; letter-spacing: 2px; margin-bottom: 40px; }
+
+        /* --- COUPLE SECTION --- */
+        .couple-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 30px; }
+        .couple-card { flex: 1; min-width: 300px; max-width: 400px; }
+        .img-box {
+            width: 200px; height: 200px; margin: 0 auto 20px;
+            border-radius: 50%; overflow: hidden;
+            border: 5px solid var(--primary); padding: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; transition: transform 0.5s; }
+        .img-box:hover img { transform: scale(1.1); }
+        
+        .name { font-size: 1.8rem; font-weight: bold; color: var(--secondary); margin-bottom: 10px; }
+        .role { color: var(--primary); font-style: italic; }
+
+        /* --- COUNTDOWN --- */
+        .countdown-section {
+            background: url('https://placehold.co/1920x600/333/cda45e?text=Save+the+Date');
+            background-size: cover; background-attachment: fixed;
+            color: white;
             position: relative;
         }
-        .couple-photo {
-            width: 100%; height: 100%; object-fit: cover;
-            border-radius: 50%; border: 4px solid #cda45e;
-            padding: 4px; background: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .countdown-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
         }
+        .timer-box {
+            position: relative; z-index: 2;
+            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+        }
+        .time-unit {
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(5px);
+            padding: 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.3);
+            width: 100px;
+        }
+        .time-unit span { display: block; font-size: 2.5rem; font-weight: bold; }
+        .time-unit label { font-size: 0.9rem; text-transform: uppercase; }
 
-        /* --- စာသား ဒီဇိုင်းများ --- */
-        .header-text {
-            font-family: 'Cinzel Decorative', cursive;
-            font-size: 0.9rem; letter-spacing: 3px;
-            color: #cda45e; font-weight: bold; text-transform: uppercase;
+        /* --- GALLERY (Lightbox) --- */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px; padding: 0 10px; max-width: 1000px; margin: 0 auto;
         }
-        .couple-names {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem; color: #b88a4d;
-            line-height: 1.1; margin: 15px 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-        }
-        .and-symbol { color: #dcccb3; font-size: 2rem; }
-        .invite-message { font-style: italic; color: #7a6a62; margin-bottom: 25px; font-size: 1rem;}
+        .gallery-item { overflow: hidden; border-radius: 8px; cursor: pointer; height: 200px; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+        .gallery-item:hover img { transform: scale(1.1); }
 
-        .ornament-divider {
-            height: 2px;
-            background-image: linear-gradient(to right, transparent, #cda45e, transparent);
-            margin: 25px auto; width: 60%; opacity: 0.5;
+        /* Lightbox Modal */
+        #lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 10000;
+            display: none; justify-content: center; align-items: center;
         }
+        #lightbox img { max-width: 90%; max-height: 90%; border: 2px solid white; box-shadow: 0 0 20px black; }
+        #close-lightbox { position: absolute; top: 20px; right: 30px; font-size: 2rem; color: white; cursor: pointer; }
 
-        .details-section h3, .location-box h3 {
-             font-family: 'Cinzel Decorative', cursive;
-             color: #b88a4d; font-size: 1.1rem; margin-bottom: 8px; margin-top: 0;
+        /* --- DETAILS & MAP --- */
+        .details-box {
+            background: white; padding: 40px; border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            max-width: 700px; margin: 0 auto; border: 1px solid #e0e0e0;
         }
-        .details-text { font-size: 1.1rem; font-weight: bold; color: #444; }
-        .details-subtext { color: #777; margin-top: 5px; font-size: 0.95rem; }
-        .location-box { margin-top: 25px; font-size: 1rem; line-height: 1.6; color: #555;}
-
-        /* --- Buttons --- */
-        .btn-group {
-            display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 30px;
+        .info-row { margin: 20px 0; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .info-row i { color: var(--primary); font-size: 1.5rem; }
+        
+        .map-container {
+            margin-top: 30px; border-radius: 10px; overflow: hidden; border: 2px solid var(--primary);
         }
         
-        /* RSVP Button */
-        .rsvp-btn {
-            display: inline-block;
-            background: linear-gradient(to right, #cda45e, #b88a4d);
-            color: white; padding: 12px 35px; border-radius: 50px;
-            text-decoration: none; font-weight: bold; letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(184, 138, 77, 0.3);
-            transition: transform 0.2s; width: 80%; max-width: 250px;
+        /* --- RSVP BUTTON --- */
+        .rsvp-float {
+            display: inline-block; background: var(--primary); color: white;
+            padding: 15px 40px; border-radius: 50px; text-decoration: none;
+            font-weight: bold; letter-spacing: 1px; margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(205, 164, 94, 0.4);
+            transition: transform 0.3s;
         }
-        .rsvp-btn:hover { transform: translateY(-2px); }
+        .rsvp-float:hover { transform: translateY(-5px); background: #b08d4b; }
 
-        /* Map Button */
-        .map-btn {
-            display: inline-block; margin-top: 10px;
-            border: 1px solid #cda45e; color: #b88a4d;
-            padding: 8px 20px; border-radius: 20px;
-            text-decoration: none; font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-        .map-btn:hover { background: #cda45e; color: white; }
+        /* --- FOOTER --- */
+        footer { background: var(--secondary); color: #777; padding: 30px; font-size: 0.9rem; }
 
-        /* --- Image Slider (Gallery) --- */
-        .gallery-container {
-            margin-top: 40px;
-            border-top: 1px dashed #e0c097;
-            padding-top: 20px;
-            overflow: hidden;
+        /* --- SAKURA (Falling Petals) --- */
+        .petal {
+            position: fixed; top: -10%; z-index: 99;
+            background: #ffc0cb; opacity: 0.6; border-radius: 100% 0 100% 0;
+            animation: fall linear infinite;
         }
-        .gallery-title {
-            font-family: 'Cinzel Decorative', cursive;
-            color: #b88a4d; font-size: 1rem; margin-bottom: 15px;
-        }
-        .slider-window {
-            width: 100%;
-            height: 250px;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-        }
-        .slider-track {
-            display: flex;
-            width: 500%;
-            animation: slideAnimation 15s infinite alternate ease-in-out;
-        }
-        .slide-img {
-            width: 20%;
-            height: 250px;
-            object-fit: cover;
-            object-position: center; /* ပုံအလယ်တည့်တည့်ကျအောင် crop လုပ်ခြင်း */
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* Slide Animation Logic */
-        @keyframes slideAnimation {
-            0% { transform: translateX(0); }
-            20% { transform: translateX(0); }
-            25% { transform: translateX(-20%); }
-            45% { transform: translateX(-20%); }
-            50% { transform: translateX(-40%); } 
-            70% { transform: translateX(-40%); }
-            75% { transform: translateX(-60%); }
-            95% { transform: translateX(-60%); }
-            100% { transform: translateX(-80%); }
+        /* --- SCROLL ANIMATION CLASS --- */
+        .reveal {
+            opacity: 0; transform: translateY(30px); transition: all 1s ease;
         }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Mobile Adjustments */
-        @media (max-width: 480px) {
-            .wedding-card { padding: 30px 15px; }
-            .couple-names { font-size: 2.8rem; }
-            .photo-frame { width: 140px; height: 140px; }
-            .slider-window { height: 200px; }
-            .slide-img { height: 200px; }
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3.5rem; }
+            .couple-wrapper { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-    <div class="card-container">
-    <div class="wedding-card">
+    <div id="loader">
+        <i class="fas fa-heart heart-beat"></i>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    <div class="music-btn" onclick="toggleMusic()">
+        <i class="fas fa-music"></i>
+    </div>
+
+    <header>
+        <div class="hero-subtitle">THE WEDDING OF</div>
+        <h1 class="hero-title">Mg Mg & Mya Mya</h1>
+        <div class="hero-date">FEBRUARY 14, 2026</div>
+    </header>
+
+    <section id="couple">
+        <h2 class="section-title reveal">Groom & Bride</h2>
+        <div class="section-subtitle reveal">မင်္ဂလာမောင်နှံ</div>
         
-        <div class="photo-frame">
-            <img src="https://placehold.co/400x400/f5efe6/cda45e?text=Profile" class="couple-photo" alt="Wedding Couple" />
-        </div>
-
-        <div class="header-text">The Wedding Of</div>
-
-        <div class="couple-names">
-            Mg Mg
-            <div class="and-symbol">&</div>
-            Mya Mya
-        </div>
-
-        <div class="invite-message">
-            မင်္ဂလာမော်ကွန်းတင် လက်မှတ်ရေးထိုးပွဲသို့ ကြွရောက်ချီးမြှင့်ပါရန် <br/>လေးစားစွာ ဖိတ်ကြားအပ်ပါသည်။
-        </div>
-
-        <div class="ornament-divider"></div>
-
-        <div class="details-section">
-            <h3>- Date & Time -</h3>
-            <div class="details-text">February 14, 2026 (Saturday)</div>
-            <div class="details-subtext">နံနက် ၉:၀၀ နာရီ မှ ၁၁:၀၀ နာရီ အထိ</div>
-        </div>
-
-        <div class="location-box">
-            <h3>- Venue -</h3>
-            <strong>Novotel Yangon Max</strong><br/>
-            ပြည်လမ်း၊ ရန်ကုန်မြို့။<br/>
-            
-            <a href="https://maps.google.com" target="_blank" class="map-btn">
-                📍 View Map
-            </a>
-        </div>
-
-        <div class="ornament-divider"></div>
-
-        <div class="btn-group">
-            <a href="tel:09123456789" class="rsvp-btn">RSVP (ဆက်သွယ်ရန်)</a>
-        </div>
-
-        <div class="gallery-container">
-            <div class="gallery-title">Our Pre-Wedding Gallery</div>
-            
-            <div class="slider-window">
-                <div class="slider-track">
-                    <img src="https://placehold.co/600x400/e0c097/white?text=Photo+1" class="slide-img" />
-                    <img src="https://placehold.co/600x400/cda45e/white?text=Photo+2" class="slide-img" />
-                    <img src="https://placehold.co/600x400/b88a4d/white?text=Photo+3" class="slide-img" />
-                    <img src="https://placehold.co/600x400/8c6b3b/white?text=Photo+4" class="slide-img" />
-                    <img src="https://placehold.co/600x400/5a4a42/white?text=Photo+5" class="slide-img" />
+        <div class="couple-wrapper">
+            <div class="couple-card reveal">
+                <div class="img-box">
+                    <img src="https://placehold.co/400x400/333/cda45e?text=Groom" alt="Groom">
                 </div>
+                <div class="name">Mg Mg</div>
+                <div class="role">The Groom</div>
+                <p>ချစ်ခြင်းမေတ္တာဖြင့် ဘဝလက်တွဲဖော်အဖြစ် ရွေးချယ်ထားသူ</p>
+            </div>
+            <div class="couple-card reveal">
+                <div class="img-box">
+                    <img src="https://placehold.co/400x400/cda45e/white?text=Bride" alt="Bride">
+                </div>
+                <div class="name">Mya Mya</div>
+                <div class="role">The Bride</div>
+                <p>ချစ်ခြင်းမေတ္တာဖြင့် ဘဝလက်တွဲဖော်အဖြစ် ရွေးချယ်ထားသူ</p>
             </div>
         </div>
+    </section>
 
-    </div>
+    <section class="reveal" style="background: white;">
+        <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--primary); margin-bottom: 20px;"></i>
+        <p style="font-size: 1.2rem; line-height: 1.8; max-width: 600px; margin: 0 auto;">
+            မင်္ဂလာကျက်သရေအပေါင်းနှင့် ပြည့်စုံသော ဤအခါသမယတွင် ကျွန်ုပ်တို့၏ မင်္ဂလာမော်ကွန်းတင် လက်မှတ်ရေးထိုးပွဲသို့ ကြွရောက်ချီးမြှင့်ပါရန် လေးစားစွာ ဖိတ်ကြားအပ်ပါသည်။
+        </p>
+    </section>
+
+    <section class="countdown-section">
+        <div class="countdown-overlay"></div>
+        <div class="timer-box">
+            <div class="time-unit"><span id="days">00</span><label>Days</label></div>
+            <div class="time-unit"><span id="hours">00</span><label>Hours</label></div>
+            <div class="time-unit"><span id="minutes">00</span><label>Mins</label></div>
+            <div class="time-unit"><span id="seconds">00</span><label>Secs</label></div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2 class="section-title reveal">Our Memories</h2>
+        <div class="section-subtitle reveal">Pre-Wedding Photo Gallery</div>
+        
+        <div class="gallery-grid reveal">
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="https://placehold.co/600x400/cda45e/white?text=Photo+1" alt="Gallery">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="https://placehold.co/600x400/b88a4d/white?text=Photo+2" alt="Gallery">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="https://placehold.co/600x400/8c6b3b/white?text=Photo+3" alt="Gallery">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="https://placehold.co/600x400/5a4a42/white?text=Photo+4" alt="Gallery">
+            </div>
+        </div>
+    </section>
+
+    <section id="event" style="background: var(--bg-cream);">
+        <h2 class="section-title reveal">When & Where</h2>
+        
+        <div class="details-box reveal">
+            <div class="info-row">
+                <i class="far fa-calendar-alt"></i>
+                <span>February 14, 2026 (Saturday)</span>
+            </div>
+            <div class="info-row">
+                <i class="far fa-clock"></i>
+                <span>09:00 AM - 11:00 AM</span>
+            </div>
+            <div class="info-row">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Novotel Yangon Max, Pyay Road.</span>
+            </div>
+
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3818.996766468798!2d96.12879531486955!3d16.82645898841744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c194ca0c058763%3A0x676b9286d90a783!2sNovotel%20Yangon%20Max!5e0!3m2!1sen!2smm!4v1626000000000!5m2!1sen!2smm" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <a href="tel:09123456789" class="rsvp-float">
+                <i class="fas fa-phone-alt"></i> Contact for RSVP
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>Thank you for being part of our big day!</p>
+        <p>&copy; 2026 Mg Mg & Mya Mya Wedding</p>
+    </footer>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <span id="close-lightbox">&times;</span>
+        <img id="lightbox-img" src="">
     </div>
 
+    <script>
+        // 1. Loading Screen
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => { loader.style.display = 'none'; }, 500);
+        });
+
+        // 2. Countdown Timer (နေ့စွဲပြင်ရန် - Month/Day/Year)
+        const weddingDate = new Date("February 14, 2026 09:00:00").getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.querySelector(".timer-box").innerHTML = "<h2>Happily Ever After!</h2>";
+            }
+        }, 1000);
+
+        // 3. Scroll Animation (On Scroll Reveal)
+        window.addEventListener('scroll', reveal);
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var revealTop = reveals[i].getBoundingClientRect().top;
+                var revealPoint = 150;
+                if (revealTop < windowHeight - revealPoint) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+
+        // 4. Music Player
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.querySelector('.music-btn');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.classList.remove('music-rotating');
+                musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+            } else {
+                music.play();
+                musicBtn.classList.add('music-rotating');
+                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // 5. Lightbox
+        function openLightbox(element) {
+            const imgSrc = element.querySelector('img').src;
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // 6. Sakura Rain Effect (Falling Petals)
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 2 + 's';
+            petal.style.width = Math.random() * 10 + 10 + 'px';
+            petal.style.height = petal.style.width;
+            
+            document.body.appendChild(petal);
+
+            setTimeout(() => { petal.remove(); }, 5000);
+        }
+        setInterval(createPetal, 300);
+    </script>
 </body>
 </html>
