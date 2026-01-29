@@ -172,8 +172,46 @@
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
-            .hero-title { font-size: 3.5rem; }
-            .couple-wrapper { flex-direction: column; }
+            /* ပြဿနာ (၁) ဖြေရှင်းချက်: Header ခေါင်းစဉ်ကို ဖုန်းနှင့် အဆင်ပြေအောင် ပြင်ခြင်း */
+            .hero-title {
+                font-size: 3rem; /* ဖောင့်ဆိုဒ်ကို လျှော့ချ */
+                line-height: 1.2; /* စာကြောင်းအကွာအဝေး ချိန်ညှိ */
+                padding: 0 10px; /* ဘေးဘောင်နှင့် မကပ်သွားအောင် */
+                word-break: keep-all; /* စာလုံးအလယ်က မပြတ်သွားအောင် */
+            }
+            .hero-date {
+                font-size: 1.2rem; /* ရက်စွဲကိုလည်း အနည်းငယ် လျှော့ချ */
+            }
+
+            /* ပြဿနာ (၂) ဖြေရှင်းချက်: Groom & Bride ကို ဘေးတိုက်ယှဉ်ခြင်း */
+            .couple-wrapper {
+                flex-direction: row; /* ဘေးတိုက် စီတန်းစေခြင်း */
+                flex-wrap: wrap; /* နေရာမဆံ့ရင် အောက်ဆင်း (მაგრამ width ချိန်ထားလို့ မဆင်းပါ) */
+                gap: 10px; /* ကဒ်နှစ်ခုကြား အကွာအဝေး */
+                justify-content: space-around; /* ဟိုဘက်ဒီဘက် ညီအောင် ညှိခြင်း */
+            }
+            .couple-card {
+                flex: 0 0 48%; /* တစ်ခုကို 48% နေရာယူ (နှစ်ခုယှဉ်ရင် 96% + gap) */
+                min-width: auto; /* မူလ min-width ကို ပယ်ဖျက် */
+                max-width: none; /* မူလ max-width ကို ပယ်ဖျက် */
+                margin-bottom: 20px; /* အောက်က စာသားနဲ့ မကပ်အောင် */
+            }
+            /* ဖုန်းမှာ ဓာတ်ပုံကို အနည်းငယ် သေးလိုက်ရင် ပိုလှပါမယ် */
+            .img-box {
+                width: 140px;
+                height: 140px;
+                margin-bottom: 15px;
+            }
+            .name {
+                font-size: 1.4rem; /* နာမည်ဖောင့်ဆိုဒ် အနည်းငယ် လျှော့ချ */
+            }
+            .role {
+                font-size: 0.9rem;
+            }
+            .couple-card p {
+                font-size: 0.85rem; /* အောက်က စာသားလေးတွေ */
+                padding: 0 5px;
+            }
         }
     </style>
 </head>
