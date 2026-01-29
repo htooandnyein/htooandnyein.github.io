@@ -211,6 +211,48 @@
             text-decoration-color: #cda45e;
         }
 
+                /* --- EVENT SLIDER (SWIPEABLE CARDS) --- */
+        .event-scroll-container {
+            display: flex;
+            overflow-x: auto; /* ဘေးတိုက် Scroll ဆွဲလို့ရအောင် */
+            scroll-snap-type: x mandatory; /* ဆွဲလိုက်ရင် ကဒ်အလယ်တည့်တည့်မှာ ရပ်သွားအောင် */
+            gap: 20px; /* ကဒ်နှစ်ခုကြား အကွာအဝေး */
+            padding: 10px 0 30px 0; /* အပေါ်အောက် အကွာအဝေး */
+            -webkit-overflow-scrolling: touch; /* iPhone မှာ ချောချောမွေ့မွေ့ဖြစ်အောင် */
+        }
+        
+        /* Scroll Bar ကို ဖျောက်ထားမည် */
+        .event-scroll-container::-webkit-scrollbar { display: none; }
+
+        .event-card-item {
+            flex: 0 0 85%; /* ဖုန်းမျက်နှာပြင်ရဲ့ ၈၅% နေရာယူမယ် (နောက်ကဒ် အစွန်းထွက်နေအောင်) */
+            max-width: 350px;
+            scroll-snap-align: center; /* ရပ်ရင် အလယ်မှာရပ်မည် */
+            background: #fff;
+            border: 2px solid #cda45e;
+            border-radius: 15px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .event-title {
+            font-family: 'Cinzel', serif; color: var(--primary);
+            font-size: 1.2rem; font-weight: bold; margin-bottom: 15px;
+            border-bottom: 1px dashed #cda45e; padding-bottom: 10px;
+            display: inline-block;
+        }
+        
+        /* Swipe လုပ်ဖို့ညွှန်ပြတဲ့ မြှား (Animation) */
+        .swipe-hint {
+            font-size: 0.8rem; color: #888; margin-bottom: 5px;
+            animation: bounceRight 2s infinite;
+        }
+        @keyframes bounceRight {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
+            40% {transform: translateX(10px);}
+            60% {transform: translateX(5px);}
+        }
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
@@ -364,31 +406,63 @@
         </div>
     </section>
 
-    <section id="event" style="background: var(--bg-cream);">
-        <h2 class="section-title reveal">When & Where</h2>
+    
+        <section id="event" style="background: var(--bg-cream);">
+        <h2 class="section-title reveal">Save The Date</h2>
+        <div class="section-subtitle reveal">ဖိတ်ကြားလွှာ (Slide to view details)</div>
         
-        <div class="details-box reveal">
-            <div class="info-row">
-                <i class="far fa-calendar-alt"></i>
-                <span>June 28, 2026 (Saturday)</span>
-            </div>
-            <div class="info-row">
-                <i class="far fa-clock"></i>
-                <span>09:00 AM - 11:00 AM</span>
-            </div>
-            <div class="info-row">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>တောင်ညိိုမြို့၊ဥတ္တရသီရိမြို့နယ်၊နေပြည်တော်</span>
+        <div class="swipe-hint"><i class="fas fa-hand-point-right"></i> Swipe for next event</div>
+
+        <div class="event-scroll-container reveal">
+            
+            <div class="event-card-item">
+                <div class="event-title">Morning Ceremony</div>
+                
+                <div class="info-row">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>February 14, 2026</span>
+                </div>
+                <div class="info-row">
+                    <i class="far fa-clock"></i>
+                    <span>09:00 AM - 11:00 AM</span>
+                </div>
+                <div class="info-row">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Novotel Yangon Max<br>(Grand Ballroom)</span>
+                </div>
+
+                <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3819.167868974567!2d96.1306163148682!3d16.81803008842213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1eb480061e227%3A0x660851f504384025!2sNovotel%20Yangon%20Max!5e0!3m2!1sen!2smm!4v1643948000000!5m2!1sen!2smm" target="_blank" class="map-btn">
+                    <i class="fas fa-map-marked-alt"></i> View Map
+                </a>
             </div>
 
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d635.5859074511576!2d96.02058361987204!3d19.93481255910724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2smm!4v1769680164015!5m2!1sen!2smm" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <div class="event-card-item">
+                <div class="event-title">Evening Reception</div>
+                
+                <div class="info-row">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>February 14, 2026</span>
+                </div>
+                <div class="info-row">
+                    <i class="far fa-clock"></i>
+                    <span>05:00 PM - 08:00 PM</span>
+                </div>
+                <div class="info-row">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Sedona Hotel<br>(Garden View)</span>
+                </div>
+
+                <a href="https://goo.gl/maps/XYZ..." target="_blank" class="map-btn">
+                    <i class="fas fa-map-marked-alt"></i> View Map
+                </a>
             </div>
 
-            <a href="tel:09123456789" class="rsvp-float">
-                <i class="fas fa-phone-alt"></i> Contact for RSVP
-            </a>
         </div>
+        
+        <a href="tel:09123456789" class="rsvp-float">
+            <i class="fas fa-phone-alt"></i> Contact for RSVP
+        </a>
+
     </section>
 
     <footer>
