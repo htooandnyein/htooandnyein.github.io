@@ -254,6 +254,14 @@
             60% {transform: translateX(5px);}
         }
 
+        .map-btn {
+    display: inline-block; margin-top: 20px;
+    padding: 8px 20px; border: 1px solid var(--primary);
+    border-radius: 20px; color: var(--primary); text-decoration: none;
+    transition: 0.3s;
+}
+.map-btn:hover { background: var(--primary); color: white; }
+        
         /* --- MOBILE --- */
         @media (max-width: 768px) {
         
@@ -311,6 +319,16 @@
             text-overflow: ellipsis;
         }
         .role { font-size: 0.7rem !important; margin-bottom: 5px; }
+
+        .gallery-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 5px !important; /* ပုံနှစ်ခုကြား အရမ်းမကွာအောင် */
+            }
+
+            /* Gallery ပုံအမြင့်ကို ညီအောင်ညှိခြင်း */
+        .gallery-item {
+                height: 150px !important; /* ဖုန်းမှာ ပုံအရမ်းမရှည်အောင် */
+            }
         
         /* ဖုန်းမှာ စာများနေရင် ရှုပ်လို့ ဖျောက်ထားလိုက်ပါ */
         
