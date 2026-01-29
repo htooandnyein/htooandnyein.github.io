@@ -172,45 +172,59 @@
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
-            /* ပြဿနာ (၁) ဖြေရှင်းချက်: Header ခေါင်းစဉ်ကို ဖုန်းနှင့် အဆင်ပြေအောင် ပြင်ခြင်း */
+            
+            /* Header နာမည် အပေါ်အောက်ထားခြင်း */
             .hero-title {
-                font-size: 3rem; /* ဖောင့်ဆိုဒ်ကို လျှော့ချ */
-                line-height: 1.2; /* စာကြောင်းအကွာအဝေး ချိန်ညှိ */
-                padding: 0 10px; /* ဘေးဘောင်နှင့် မကပ်သွားအောင် */
-                word-break: keep-all; /* စာလုံးအလယ်က မပြတ်သွားအောင် */
-            }
-            .hero-date {
-                font-size: 1.2rem; /* ရက်စွဲကိုလည်း အနည်းငယ် လျှော့ချ */
+                font-size: 3rem !important;
+                display: flex; flex-direction: column; gap: 5px;
             }
 
-            /* ပြဿနာ (၂) ဖြေရှင်းချက်: Groom & Bride ကို ဘေးတိုက်ယှဉ်ခြင်း */
+            /* ပြဿနာဖြေရှင်းချက် - Groom/Heart/Bride ကို ဘေးတိုက်အတင်းထားခြင်း */
             .couple-wrapper {
-                flex-direction: row; /* ဘေးတိုက် စီတန်းစေခြင်း */
-                flex-wrap: wrap; /* နေရာမဆံ့ရင် အောက်ဆင်း (მაგრამ width ချိန်ထားလို့ မဆင်းပါ) */
-                gap: 10px; /* ကဒ်နှစ်ခုကြား အကွာအဝေး */
-                justify-content: space-around; /* ဟိုဘက်ဒီဘက် ညီအောင် ညှိခြင်း */
+                display: flex !important;
+                flex-direction: row !important; /* ဘေးတိုက် */
+                flex-wrap: nowrap !important;   /* အောက်မဆင်းစေရ (အရေးကြီးဆုံးအချက်) */
+                justify-content: center;
+                align-items: center; /* အလယ်တည့်တည့် */
+                gap: 5px; /* ကဒ်ကြားအကွာအဝေး */
+                width: 100%;
             }
+
+            /* ကဒ်တစ်ခုချင်းစီ၏ ဆိုဒ်ကို ကျုံ့လိုက်ခြင်း */
             .couple-card {
-                flex: 0 0 48%; /* တစ်ခုကို 48% နေရာယူ (နှစ်ခုယှဉ်ရင် 96% + gap) */
-                min-width: auto; /* မူလ min-width ကို ပယ်ဖျက် */
-                max-width: none; /* မူလ max-width ကို ပယ်ဖျက် */
-                margin-bottom: 20px; /* အောက်က စာသားနဲ့ မကပ်အောင် */
+                flex: 1; /* နေရာတူညီစွာ ခွဲယူမည် */
+                width: auto !important;
+                min-width: 0 !important; /* မဆံ့ရင် ကျုံ့ခွင့်ပေးမည် */
+                margin: 0 !important;
+                padding: 5px !important;
             }
-            /* ဖုန်းမှာ ဓာတ်ပုံကို အနည်းငယ် သေးလိုက်ရင် ပိုလှပါမယ် */
+
+            /* ဖုန်းမှာ ပုံကြီးနေရင် ဘေးတိုက်မဆံ့လို့ ပုံကိုချုံ့ရပါမယ် */
             .img-box {
-                width: 140px;
-                height: 140px;
-                margin-bottom: 15px;
+                width: 80px !important;  /* ပုံဆိုဒ် အသေး */
+                height: 80px !important;
+                margin-bottom: 10px;
+                border-width: 3px !important;
             }
-            .name {
-                font-size: 1.4rem; /* နာမည်ဖောင့်ဆိုဒ် အနည်းငယ် လျှော့ချ */
+
+            /* စာလုံးဆိုဒ်များ လိုက်လျော့ခြင်း */
+            .name { font-size: 1rem !important; margin-bottom: 5px; }
+            .role { font-size: 0.8rem !important; }
+            
+            /* ဖုန်းမှာ စာများနေရင် ရှုပ်လို့ ဖျောက်ထားနိုင်သည် (သို့) သေးပေးနိုင်သည် */
+            .couple-card p { 
+                font-size: 0.7rem !important; 
+                line-height: 1.2;
             }
-            .role {
-                font-size: 0.9rem;
+
+            /* အလယ်က အသည်းပုံကို ချိန်ညှိခြင်း */
+            .heart-divider {
+                flex: 0 0 auto; /* သူ့ဆိုဒ်အတိုင်းပဲ နေမည် */
+                margin: 0 5px !important;
             }
-            .couple-card p {
-                font-size: 0.85rem; /* အောက်က စာသားလေးတွေ */
-                padding: 0 5px;
+            .heart-divider i {
+                font-size: 1.2rem !important; /* အသည်းပုံ အသေး */
+                padding: 8px !important;
             }
         }
     </style>
@@ -231,11 +245,11 @@
     <header>
         <div class="hero-subtitle">THE WEDDING OF</div>
         <h1 class="hero-title">
-    <div>Mg Mg</div>
+    <div>Thu Htoo San</div>
     <div style="font-size: 0.6em; margin: 10px 0; color: #e0c097;">&</div>
-    <div>Mya Mya</div>
+    <div>Khin Nyein Htwe</div>
 </h1>
-       /* <h1 class="hero-title">Thu Htoo San & Khin Nyein Htwe</h1> */
+       // <h1 class="hero-title">Thu Htoo San & Khin Nyein Htwe</h1> 
         <div class="hero-date">JUNE 28, 2026</div>
     </header>
 
