@@ -172,61 +172,67 @@
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
-            
-            /* Header နာမည် အပေါ်အောက်ထားခြင်း */
-            .hero-title {
-                font-size: 3rem !important;
-                display: flex; flex-direction: column; gap: 5px;
-            }
-
-            /* ပြဿနာဖြေရှင်းချက် - Groom/Heart/Bride ကို ဘေးတိုက်အတင်းထားခြင်း */
-            .couple-wrapper {
-                display: flex !important;
-                flex-direction: row !important; /* ဘေးတိုက် */
-                flex-wrap: nowrap !important;   /* အောက်မဆင်းစေရ (အရေးကြီးဆုံးအချက်) */
-                justify-content: center;
-                align-items: center; /* အလယ်တည့်တည့် */
-                gap: 5px; /* ကဒ်ကြားအကွာအဝေး */
-                width: 100%;
-            }
-
-            /* ကဒ်တစ်ခုချင်းစီ၏ ဆိုဒ်ကို ကျုံ့လိုက်ခြင်း */
-            .couple-card {
-                flex: 1; /* နေရာတူညီစွာ ခွဲယူမည် */
-                width: auto !important;
-                min-width: 0 !important; /* မဆံ့ရင် ကျုံ့ခွင့်ပေးမည် */
-                margin: 0 !important;
-                padding: 5px !important;
-            }
-
-            /* ဖုန်းမှာ ပုံကြီးနေရင် ဘေးတိုက်မဆံ့လို့ ပုံကိုချုံ့ရပါမယ် */
-            .img-box {
-                width: 80px !important;  /* ပုံဆိုဒ် အသေး */
-                height: 80px !important;
-                margin-bottom: 10px;
-                border-width: 3px !important;
-            }
-
-            /* စာလုံးဆိုဒ်များ လိုက်လျော့ခြင်း */
-            .name { font-size: 1rem !important; margin-bottom: 5px; }
-            .role { font-size: 0.8rem !important; }
-            
-            /* ဖုန်းမှာ စာများနေရင် ရှုပ်လို့ ဖျောက်ထားနိုင်သည် (သို့) သေးပေးနိုင်သည် */
-            .couple-card p { 
-                font-size: 0.7rem !important; 
-                line-height: 1.2;
-            }
-
-            /* အလယ်က အသည်းပုံကို ချိန်ညှိခြင်း */
-            .heart-divider {
-                flex: 0 0 auto; /* သူ့ဆိုဒ်အတိုင်းပဲ နေမည် */
-                margin: 0 5px !important;
-            }
-            .heart-divider i {
-                font-size: 1.2rem !important; /* အသည်းပုံ အသေး */
-                padding: 8px !important;
-            }
+        
+        /* Header နာမည် အပေါ်အောက်ထားခြင်း */
+        .hero-title {
+            font-size: 2.5rem !important;
+            display: flex; flex-direction: column; gap: 0;
+            line-height: 1.2;
         }
+
+        /* Groom - Heart - Bride ကို ဘေးတိုက်ထားခြင်း */
+        .couple-wrapper {
+            display: flex !important;
+            flex-direction: row !important; /* ဘေးတိုက် */
+            flex-wrap: nowrap !important;   /* အောက်မဆင်းစေရ */
+            justify-content: center !important;
+            align-items: flex-start !important; /* အပေါ်ညီစေရန် */
+            width: 100% !important;
+            padding: 0 5px !important; /* ဘေးဘောင် နည်းနည်းခြား */
+            gap: 2px !important; /* ကြားအကွာအဝေး အနည်းဆုံးထား */
+        }
+
+        /* ကဒ်တစ်ခုချင်းစီ */
+        .couple-card {
+            flex: 1 !important; /* နေရာတူညီစွာ ခွဲယူမည် */
+            min-width: 0 !important; /* မဆံ့ရင် ကျုံ့ခွင့်ပေး (အရေးကြီးဆုံး) */
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* ဓာတ်ပုံကို ဖုန်းထဲတွင် သေးလိုက်မှ ဆံ့ပါမည် */
+        .img-box {
+            width: 65px !important;  /* 65px လောက်ဆို အဆင်ပြေသည် */
+            height: 65px !important;
+            margin: 0 auto 5px auto !important;
+            border-width: 2px !important;
+        }
+
+        /* အလယ်က အသည်းပုံ */
+        .heart-divider {
+            flex: 0 0 30px !important; /* အသည်းပုံနေရာ သတ်မှတ် */
+            margin-top: 20px !important; /* မျက်နှာများနှင့် တန်းတူညီရန် */
+        }
+        .heart-divider i {
+            font-size: 0.8rem !important; 
+            padding: 8px !important;
+        }
+
+        /* စာလုံးဆိုဒ်များ လိုက်လျော့ခြင်း */
+        .name { 
+            font-size: 0.9rem !important; 
+            margin-bottom: 2px; 
+            white-space: nowrap; /* နာမည်ကို တစ်ကြောင်းတည်းထားရန် */
+            overflow: hidden; 
+            text-overflow: ellipsis;
+        }
+        .role { font-size: 0.7rem !important; margin-bottom: 5px; }
+        
+        /* ဖုန်းမှာ စာများနေရင် ရှုပ်လို့ ဖျောက်ထားလိုက်ပါ */
+        .couple-card p { 
+            display: none !important; 
+        }
+    }
     </style>
 </head>
 <body>
@@ -249,7 +255,6 @@
     <div style="font-size: 0.6em; margin: 10px 0; color: #e0c097;">&</div>
     <div>Khin Nyein Htwe</div>
 </h1>
-       // <h1 class="hero-title">Thu Htoo San & Khin Nyein Htwe</h1> 
         <div class="hero-date">JUNE 28, 2026</div>
     </header>
 
@@ -323,7 +328,7 @@
         <div class="details-box reveal">
             <div class="info-row">
                 <i class="far fa-calendar-alt"></i>
-                <span>February 14, 2026 (Saturday)</span>
+                <span>June 28, 2026 (Saturday)</span>
             </div>
             <div class="info-row">
                 <i class="far fa-clock"></i>
@@ -346,7 +351,7 @@
 
     <footer>
         <p>Thank you for being part of our big day!</p>
-        <p>&copy; 2026 Mg Mg & Mya Mya Wedding</p>
+        <p>&copy; 2026 Htoo & Nyein Wedding</p>
     </footer>
 
     <div id="lightbox" onclick="closeLightbox()">
@@ -363,7 +368,7 @@
         });
 
         // 2. Countdown Timer (နေ့စွဲပြင်ရန် - Month/Day/Year)
-        const weddingDate = new Date("February 14, 2026 09:00:00").getTime();
+        const weddingDate = new Date("June 28, 2026 09:00:00").getTime();
 
         const timer = setInterval(function() {
             const now = new Date().getTime();
