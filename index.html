@@ -170,6 +170,48 @@
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+                /* --- INFO MODAL (POPUP) --- */
+        .modal-overlay {
+            display: none; /* ပုံမှန်ချိန်မှာ ဖျောက်ထားမည် */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 10000;
+            justify-content: center; align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        .modal-box {
+            background: white; width: 90%; max-width: 400px;
+            padding: 30px; border-radius: 15px;
+            text-align: center; position: relative;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 20px rgba(205, 164, 94, 0.5);
+            animation: zoomIn 0.3s ease;
+        }
+        .close-btn {
+            position: absolute; top: 10px; right: 15px;
+            font-size: 2rem; color: #888; cursor: pointer;
+        }
+        .modal-title {
+            font-family: 'Great Vibes', cursive; color: var(--primary);
+            font-size: 2.5rem; margin-bottom: 10px;
+        }
+        .modal-info h4 {
+            font-family: 'Cinzel', serif; color: var(--secondary);
+            font-size: 1rem; margin-top: 15px; border-bottom: 1px solid #eee;
+            padding-bottom: 5px; display: inline-block;
+        }
+        .modal-info p { color: #555; margin-top: 5px; font-weight: bold; }
+        
+        /* နာမည်တွေကို နှိပ်လို့ရကြောင်း ပြရန် */
+        .clickable-name {
+            cursor: pointer; transition: color 0.3s;
+            text-decoration: underline; text-decoration-color: transparent;
+        }
+        .clickable-name:hover {
+            color: #fff; text-shadow: 0 0 10px #cda45e;
+            text-decoration-color: #cda45e;
+        }
+
+
         /* --- MOBILE --- */
         @media (max-width: 768px) {
         
@@ -248,11 +290,13 @@
 
     <header>
         <div class="hero-subtitle">THE WEDDING OF</div>
-        <h1 class="hero-title">
-    <div>Thu Htoo San</div>
-    <div style="font-size: 0.6em; margin: 10px 0; color: #e0c097;">&</div>
-    <div>Khin Nyein Htwe</div>
-</h1>
+            <h1 class="hero-title">
+        <div class="clickable-name" onclick="openModal('modal-groom')">Thu Htoo San</div>
+        
+        <div style="font-size: 0.6em; margin: 10px 0; color: #e0c097;">&</div>
+        
+        <div class="clickable-name" onclick="openModal('modal-bride')">Khin Nyein Htwe</div>
+    </h1>
         <div class="hero-date">JUNE 28, 2026</div>
     </header>
 
@@ -357,6 +401,41 @@
         <img id="lightbox-img" src="">
     </div>
 
+        <div id="modal-groom" class="modal-overlay" onclick="closeModal('modal-groom')">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeModal('modal-groom')">&times;</span>
+            <div class="modal-title">Mg Mg</div>
+            <div class="modal-info">
+                <h4>မိဘအမည်</h4>
+                <p>ဦးဘ + ဒေါ်လှ</p>
+                
+                <h4>ပညာအရည်အချင်း</h4>
+                <p>B.E (Civil) - YTU</p>
+
+                <h4>အလုပ်အကိုင်</h4>
+                <p>Senior Engineer</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-bride" class="modal-overlay" onclick="closeModal('modal-bride')">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeModal('modal-bride')">&times;</span>
+            <div class="modal-title">Mya Mya</div>
+            <div class="modal-info">
+                <h4>မိဘအမည်</h4>
+                <p>ဦးမြ + ဒေါ်စိန်</p>
+                
+                <h4>ပညာအရည်အချင်း</h4>
+                <p>M.B.B.S (UM-1)</p>
+
+                <h4>အလုပ်အကိုင်</h4>
+                <p>Doctor</p>
+            </div>
+        </div>
+    </div>
+
+
     <script>
         // 1. Loading Screen
         window.addEventListener('load', function() {
@@ -439,6 +518,16 @@
             setTimeout(() => { petal.remove(); }, 5000);
         }
         setInterval(createPetal, 300);
+
+                // Modal ဖွင့်ရန် Function
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+        // Modal ပိတ်ရန် Function
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
     </script>
 </body>
 </html>
